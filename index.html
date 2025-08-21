@@ -91,6 +91,11 @@
 
     let wordList = wordData.words;
     let currentWord = "";
+    let reviewedCount = 0; // ✅ counter variable
+
+    function updateCounter() {
+      document.getElementById("counter").innerText = "Words reviewed: " + reviewedCount;
+    }
 
     function speak(text) {
       const utterance = new SpeechSynthesisUtterance(text);
@@ -106,6 +111,9 @@
       currentWord = wordList[Math.floor(Math.random() * wordList.length)];
       document.getElementById("revealedWord").innerText = ""; // clear previous
       speak(currentWord);
+
+      reviewedCount++;   // ✅ increment counter
+      updateCounter();
     }
 
     function replayWord() {
@@ -123,6 +131,9 @@
         alert("No word has been spoken yet!");
       }
     }
+
+    // Initialise counter
+    updateCounter();
   </script>
 </body>
 </html>
