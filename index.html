@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spelling Bee Practice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #273b87;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1d2c63;
+    }
+    #revealedWord {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #273b87;
+    }
+  </style>
+</head>
+<body>
+  <h1>Spelling Bee Practice</h1>
+  <button onclick="speakRandomWord()">Speak Word</button>
+  <button onclick="replayWord()">Replay Word</button>
+  <button onclick="revealWord()">Reveal Word</button>
+
+  <div id="revealedWord"></div>
+
+  <script>
+    // ✅ Embedded JSON list of words
+    const wordData = {
+      "words": ["Children", "Pink","Castle","Trees","Judo","Surf","Cycle","Step",
+                "House","River","Run","Walk","Mouse","Rabbit","Snake","Bat","Photo",
+                "Friend","Secret","School","Class","Password","Sport","Dress","Summer",
+                "Friday","Chess","Swimming","Country","Rou ne","Snail","Shoes","Garden",
+                "Spider","Flowers","Tomato","Sing","Wash","Book","Home","Sleep","Face",
+                "Monday","Clock","Watch","Eleven","Hobby","Comic","Karate","Piano","Dance",
+                "Cake","Picture","Time","Spoon","Read","False","March","Music","Fork","Teacher",
+                "Yellow","Trumpet","Guitar","Violin","Play","Concert","Rock","Pop","Drums","Never",
+                "Carrot","Pepper","Rice","Year","Chicken","Animal","Cat","Sheep","Water","Fish","World",
+                "Uncle","Food","Whale","Plate","Onion","Olives","Please","Pizza","Spinach","Burger",
+                "Noodles","Dish","China","Pasta","Curry","Orange","Ice","Cotton","Lemon","Lamp","Milk",
+                "Eggs","Hot","Bread","Drink","Ready","Word","Beach","Boat","Football","Shells","Picnic",
+                "Winter","Fly","Small","Big","Kite","Help","Pool","Today","Frisbee","Dark","Heavy","Fast",
+                "Lion","Zebra","Short","Cloud","Soil","River","Hamster","Salt","Tall","Rain","Mineral","Sun",
+                "Sky","Boat","Family","Chair","Dinner","Table","Story","Problem","Draw","Write","Group","Strong",
+                "Fit","Clever","Brave","Power","Name","Girl","Slow","Team","Old","People","True","Mountain","Oﬃce",
+                "Boots","Stop","Important","Mother","Answer","Skirt","Uniform","Blue","Shirt","Purple","Brother",
+                "City","Lake","Forest","Visit","Yesterday","Skate","Curtain","Carpet","Rug","Bedroom","Toilet",
+                "Palace","Pencil","Ruler","Calendar","Museum","Turtle","Paper","Frog","Jump","Homework","Clean",
+                "Sister","Happy","Farmer","Horse",]
+    };
+
+    let wordList = wordData.words;
+    let currentWord = "";
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-US"; // change to "en-GB" for British accent
+      speechSynthesis.speak(utterance);
+    }
+
+    function speakRandomWord() {
+      if (wordList.length === 0) {
+        alert("Word list is empty!");
+        return;
+      }
+      currentWord = wordList[Math.floor(Math.random() * wordList.length)];
+      document.getElementById("revealedWord").innerText = ""; // clear previous
+      speak(currentWord);
+    }
+
+    function replayWord() {
+      if (currentWord) {
+        speak(currentWord);
+      } else {
+        alert("No word has been spoken yet!");
+      }
+    }
+
+    function revealWord() {
+      if (currentWord) {
+        document.getElementById("revealedWord").innerText = currentWord;
+      } else {
+        alert("No word has been spoken yet!");
+      }
+    }
+  </script>
+</body>
+</html>
