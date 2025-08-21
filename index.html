@@ -2,41 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ✅ important for mobile -->
   <title>Spelling Bee Practice</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 50px;
+      margin: 0;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    h1 {
+      color: #273b87;
+      margin-bottom: 30px;
     }
     button {
       margin: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 15px 30px;
+      font-size: 18px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       background-color: #273b87;
       color: white;
       cursor: pointer;
+      transition: background 0.3s ease;
+      width: 200px;
+      max-width: 80%;
     }
     button:hover {
       background-color: #1d2c63;
     }
     #revealedWord {
-      margin-top: 20px;
-      font-size: 22px;
+      margin-top: 30px;
+      font-size: 24px;
       font-weight: bold;
       color: #273b87;
+    }
+
+    /* ✅ Responsive adjustments */
+    @media (max-width: 600px) {
+      button {
+        font-size: 22px;
+        padding: 20px 40px;
+        width: 90%;   /* take more space on small screens */
+      }
+      h1 {
+        font-size: 26px;
+      }
+      #revealedWord {
+        font-size: 28px;
+      }
     }
   </style>
 </head>
 <body>
   <h1>Spelling Bee Practice</h1>
-  <button onclick="speakRandomWord()">Speak Word</button>
-  <button onclick="replayWord()">Replay Word</button>
+  <button onclick="speakRandomWord()">Speak Word</button><br>
+  <button onclick="replayWord()">Replay Word</button><br>
   <button onclick="revealWord()">Reveal Word</button>
 
   <div id="revealedWord"></div>
+
 
   <script>
     // ✅ Embedded JSON list of words
